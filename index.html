@@ -14,10 +14,10 @@
     --muted: #7a7068;
     --line: rgba(13,13,13,0.12);
   }
-
+ 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-
+ 
   body {
     background: var(--paper);
     color: var(--ink);
@@ -26,7 +26,7 @@
     line-height: 1.7;
     overflow-x: hidden;
   }
-
+ 
   body::before {
     content: '';
     position: fixed;
@@ -36,7 +36,7 @@
     z-index: 9999;
     opacity: 0.5;
   }
-
+ 
   /* NAV */
   nav {
     position: fixed;
@@ -87,7 +87,7 @@
   }
   .nav-cta::after { display: none !important; }
   .nav-cta:hover { background: var(--accent); color: var(--paper) !important; }
-
+ 
   /* HERO */
   #hero {
     min-height: 100vh;
@@ -139,7 +139,7 @@
     line-height: 1.8;
   }
   .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
-
+ 
   .btn {
     display: inline-flex;
     align-items: center;
@@ -160,7 +160,7 @@
   .btn-primary:hover { background: var(--accent); border-color: var(--accent); }
   .btn-outline { color: var(--ink); }
   .btn-outline:hover { background: var(--ink); color: var(--paper); }
-
+ 
   .hero-right {
     display: flex;
     flex-direction: column;
@@ -233,7 +233,7 @@
     color: var(--muted);
     writing-mode: vertical-rl;
   }
-
+ 
   /* SECTIONS */
   section { padding: 7rem 4rem; border-top: 1px solid var(--line); }
   .section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 4rem; }
@@ -252,7 +252,7 @@
     line-height: 1.1;
   }
   .section-line { flex: 1; height: 1px; background: var(--line); }
-
+ 
   /* ABOUT */
   #about {
     padding: 7rem 4rem;
@@ -291,7 +291,7 @@
     cursor: default;
   }
   .skill-pill:hover { border-color: var(--accent); color: var(--accent); background: rgba(200,75,47,0.04); }
-
+ 
   /* EXPERIENCE */
   #experience {
     background: var(--ink);
@@ -340,7 +340,7 @@
     border-radius: 2px;
     margin-bottom: 1rem;
   }
-
+ 
   /* IMPACT */
   .impact-grid {
     display: grid;
@@ -369,7 +369,7 @@
   .impact-num { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; color: var(--accent); line-height: 1; margin-bottom: 0.75rem; }
   .impact-title { font-size: 1rem; font-weight: 500; margin-bottom: 0.5rem; }
   .impact-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
-
+ 
   /* CONTACT */
   #contact { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
   .contact-left { padding-right: 5rem; border-right: 1px solid var(--line); }
@@ -407,7 +407,7 @@
   .contact-input::placeholder { color: rgba(13,13,13,0.25); }
   textarea.contact-input { resize: none; height: 100px; font-family: 'DM Sans', sans-serif; }
   .contact-submit { align-self: flex-start; margin-top: 0.5rem; }
-
+ 
   /* FOOTER */
   footer {
     border-top: 1px solid var(--line);
@@ -420,7 +420,7 @@
   .footer-links { display: flex; gap: 2rem; }
   .footer-links a { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
   .footer-links a:hover { color: var(--accent); }
-
+ 
   /* ANIMATIONS */
   .fade-up { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .fade-up.visible { opacity: 1; transform: translateY(0); }
@@ -428,7 +428,7 @@
   .delay-2 { transition-delay: 0.2s; }
   .delay-3 { transition-delay: 0.3s; }
   .delay-4 { transition-delay: 0.4s; }
-
+ 
   /* MOBILE */
   @media (max-width: 900px) {
     nav { padding: 1rem 1.5rem; }
@@ -452,7 +452,7 @@
 </style>
 </head>
 <body>
-
+ 
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#">Sanjiv Mohanty</a>
@@ -464,7 +464,7 @@
     <li><a href="mailto:sanjivmohanty04@gmail.com" class="nav-cta">Hire Me →</a></li>
   </ul>
 </nav>
-
+ 
 <!-- HERO -->
 <section id="hero">
   <div class="hero-left">
@@ -500,7 +500,7 @@
     <div class="hero-scroll">Scroll to explore</div>
   </div>
 </section>
-
+ 
 <!-- ABOUT -->
 <div id="about">
   <div class="fade-up">
@@ -536,7 +536,7 @@
     </div>
   </div>
 </div>
-
+ 
 <!-- EXPERIENCE -->
 <section id="experience" style="background:var(--ink);color:var(--paper);">
   <div class="section-header">
@@ -545,7 +545,7 @@
     <div class="section-line"></div>
   </div>
   <div class="exp-list">
-
+ 
     <div class="exp-item fade-up">
       <div class="exp-meta">
         <div class="exp-co">TravClan</div>
@@ -564,7 +564,7 @@
         </ul>
       </div>
     </div>
-
+ 
     <div class="exp-item fade-up delay-1">
       <div class="exp-meta">
         <div class="exp-co">Shapoorji Pallonji E&C</div>
@@ -581,7 +581,7 @@
         </ul>
       </div>
     </div>
-
+ 
     <div class="exp-item fade-up delay-2">
       <div class="exp-meta">
         <div class="exp-co">TATA Motors</div>
@@ -595,10 +595,10 @@
         </ul>
       </div>
     </div>
-
+ 
   </div>
 </section>
-
+ 
 <!-- IMPACT -->
 <section id="impact">
   <div class="section-header">
@@ -639,7 +639,7 @@
     </div>
   </div>
 </section>
-
+ 
 <!-- CONTACT -->
 <section id="contact">
   <div class="contact-left fade-up">
@@ -653,7 +653,7 @@
       <li><span class="contact-icon">Location</span><span>Ghaziabad, Uttar Pradesh, India</span></li>
     </ul>
   </div>
-
+ 
   <div class="contact-right fade-up delay-2">
     <div>
       <label class="contact-form-label">Your Name</label>
@@ -672,7 +672,7 @@
     <div id="form-error" style="display:none;font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:#c84b2f;margin-top:1rem;">✕ Something went wrong — please email directly.</div>
   </div>
 </section>
-
+ 
 <!-- FOOTER -->
 <footer>
   <span class="footer-note">© 2025 Sanjiv Mohanty</span>
@@ -682,7 +682,7 @@
     <a href="#hero">Back to top ↑</a>
   </div>
 </footer>
-
+ 
 <script>
   /* ============================================================
      GOOGLE SHEETS INTEGRATION
@@ -690,28 +690,28 @@
      ➜ Go to Extensions → Apps Script → Deploy → New Deployment
      ============================================================ */
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx2nW3s3rMZZIkuPSwOczLQfQz27ssqDpAmxqD15ddtAehl4gBnOq1p37yOFh-57sA58Q/exec';
-
+ 
   async function handleContactSubmit(btn) {
     const nameEl    = document.getElementById('field-name');
     const emailEl   = document.getElementById('field-email');
     const messageEl = document.getElementById('field-message');
     const successEl = document.getElementById('form-success');
     const errorEl   = document.getElementById('form-error');
-
+ 
     // Reset state
     successEl.style.display = 'none';
     errorEl.style.display   = 'none';
-
+ 
     // Validate
     if (!nameEl.value.trim() || !emailEl.value.trim() || !messageEl.value.trim()) {
       btn.textContent = 'Please fill all fields';
       setTimeout(() => btn.textContent = 'Send Message →', 2000);
       return;
     }
-
+ 
     btn.textContent = 'Sending…';
     btn.disabled = true;
-
+ 
     try {
       await fetch(APPS_SCRIPT_URL, {
         method: 'POST',
@@ -735,21 +735,21 @@
       errorEl.style.display = 'block';
     }
   }
-
+ 
   /* ============================================================
      SCROLL ANIMATIONS
      ============================================================ */
   const fadeObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
-
+ 
   document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
-
+ 
   // Immediately reveal hero stats
   setTimeout(() => {
     document.querySelectorAll('#hero .fade-up').forEach(el => el.classList.add('visible'));
   }, 300);
-
+ 
   /* ============================================================
      NAV ACTIVE STATES
      ============================================================ */
@@ -763,8 +763,9 @@
       }
     });
   }, { threshold: 0.4 });
-
+ 
   document.querySelectorAll('section[id], div[id]').forEach(s => navObserver.observe(s));
 </script>
 </body>
 </html>
+ 
