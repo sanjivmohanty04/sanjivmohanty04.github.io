@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sanjiv Mohanty — Strategy & Product</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --paper: #f5f0e8;
+    --accent: #c84b2f;
+    --gold: #b8922a;
+    --muted: #7a7068;
+    --line: rgba(13,13,13,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.5;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 4rem;
+    background: rgba(245,240,232,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.25s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 0; height: 1px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    background: var(--ink);
+    color: var(--paper) !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 2px;
+  }
+  .nav-cta::after { display: none !important; }
+  .nav-cta:hover { background: var(--accent); color: var(--paper) !important; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 4rem;
+    border-right: 1px solid var(--line);
+  }
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero-tag::before { content: ''; width: 2rem; height: 1px; background: var(--accent); }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 6vw, 6rem);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.25rem;
+  }
+  .hero-name em { font-style: italic; color: var(--accent); }
+  .hero-sub {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+  .hero-desc {
+    font-size: 1rem;
+    color: #444;
+    max-width: 440px;
+    margin-bottom: 3rem;
+    line-height: 1.8;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1.5px solid var(--ink);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    background: transparent;
+  }
+  .btn-primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+  .btn-outline { color: var(--ink); }
+  .btn-outline:hover { background: var(--ink); color: var(--paper); }
+
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg-text {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    font-family: 'Playfair Display', serif;
+    font-size: 11rem;
+    font-weight: 900;
+    color: rgba(13,13,13,0.04);
+    pointer-events: none;
+    white-space: nowrap;
+    user-select: none;
+  }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin-top: auto;
+  }
+  .stat-cell {
+    background: var(--paper);
+    padding: 2rem;
+    position: relative;
+  }
+  .stat-cell::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 2rem; right: 2rem;
+    height: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .stat-cell:hover::after { background: var(--accent); }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--ink);
+    display: block;
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.25rem;
+  }
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem; right: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    writing-mode: vertical-rl;
+  }
+
+  /* SECTIONS */
+  section { padding: 7rem 4rem; border-top: 1px solid var(--line); }
+  .section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 4rem; }
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+  }
+  .section-line { flex: 1; height: 1px; background: var(--line); }
+
+  /* ABOUT */
+  #about {
+    padding: 7rem 4rem;
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 5rem;
+  }
+  .about-meta { list-style: none; margin-top: 2rem; }
+  .about-meta li {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .about-meta span:first-child {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .about-meta span:last-child { font-size: 0.95rem; margin-top: 0.2rem; }
+  .about-text { font-size: 1.1rem; line-height: 1.9; color: #333; margin-bottom: 1.5rem; }
+  .about-text strong { color: var(--ink); font-weight: 500; }
+  .skills-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; }
+  .skill-pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    color: var(--muted);
+    transition: all 0.2s;
+    cursor: default;
+  }
+  .skill-pill:hover { border-color: var(--accent); color: var(--accent); background: rgba(200,75,47,0.04); }
+
+  /* EXPERIENCE */
+  #experience {
+    background: var(--ink);
+    color: var(--paper);
+    --line: rgba(245,240,232,0.1);
+  }
+  #experience .section-tag { color: rgba(245,240,232,0.4); }
+  #experience .section-title { color: var(--paper); }
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 0;
+    border-top: 1px solid rgba(245,240,232,0.1);
+    padding: 3rem 0;
+    position: relative;
+    transition: all 0.3s;
+  }
+  .exp-item:last-child { border-bottom: 1px solid rgba(245,240,232,0.1); }
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 0;
+    background: rgba(200,75,47,0.06);
+    transition: width 0.4s ease;
+  }
+  .exp-item:hover::before { width: 100%; }
+  .exp-meta { padding-right: 2rem; border-right: 1px solid rgba(245,240,232,0.1); }
+  .exp-co { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .exp-role { font-size: 0.85rem; color: rgba(245,240,232,0.5); margin-bottom: 0.5rem; }
+  .exp-date { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; }
+  .exp-body { padding-left: 3rem; }
+  .exp-highlights { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem; }
+  .exp-highlights li { font-size: 0.92rem; line-height: 1.7; color: rgba(245,240,232,0.75); padding-left: 1.25rem; position: relative; }
+  .exp-highlights li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 0.8rem; }
+  .exp-badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 2px;
+    margin-bottom: 1rem;
+  }
+
+  /* IMPACT */
+  .impact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--line);
+  }
+  .impact-card {
+    padding: 2.5rem;
+    border-right: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  .impact-card:last-child { border-right: none; }
+  .impact-card:hover { background: rgba(200,75,47,0.03); }
+  .impact-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .impact-card:hover::before { background: var(--accent); }
+  .impact-num { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; color: var(--accent); line-height: 1; margin-bottom: 0.75rem; }
+  .impact-title { font-size: 1rem; font-weight: 500; margin-bottom: 0.5rem; }
+  .impact-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+  /* CONTACT */
+  #contact { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .contact-left { padding-right: 5rem; border-right: 1px solid var(--line); }
+  .contact-tagline { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.15; margin-bottom: 1.5rem; }
+  .contact-tagline em { color: var(--accent); font-style: italic; }
+  .contact-info-list { list-style: none; margin-top: 2.5rem; display: flex; flex-direction: column; gap: 0; }
+  .contact-info-list li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .contact-info-list a { color: var(--ink); text-decoration: none; transition: color 0.2s; }
+  .contact-info-list a:hover { color: var(--accent); }
+  .contact-icon { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); min-width: 60px; }
+  .contact-right { padding-left: 5rem; display: flex; flex-direction: column; gap: 1rem; }
+  .contact-form-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 0.4rem; }
+  .contact-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    padding: 0.75rem 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.25s;
+    margin-bottom: 1.25rem;
+  }
+  .contact-input:focus { border-color: var(--accent); }
+  .contact-input::placeholder { color: rgba(13,13,13,0.25); }
+  textarea.contact-input { resize: none; height: 100px; font-family: 'DM Sans', sans-serif; }
+  .contact-submit { align-self: flex-start; margin-top: 0.5rem; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-note { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .footer-links { display: flex; gap: 2rem; }
+  .footer-links a { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--accent); }
+
+  /* ANIMATIONS */
+  .fade-up { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.2s; }
+  .delay-3 { transition-delay: 0.3s; }
+  .delay-4 { transition-delay: 0.4s; }
+
+  /* MOBILE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    #hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 4rem 1.5rem 2rem; border-right: none; }
+    .hero-right { padding: 1.5rem; }
+    #about { grid-template-columns: 1fr; gap: 2rem; padding: 4rem 1.5rem; }
+    section { padding: 4rem 1.5rem; }
+    #experience { padding: 4rem 1.5rem; }
+    .exp-item { grid-template-columns: 1fr; }
+    .exp-meta { border-right: none; border-bottom: 1px solid rgba(245,240,232,0.1); padding-bottom: 1rem; }
+    .exp-body { padding-left: 0; margin-top: 1rem; }
+    .impact-grid { grid-template-columns: 1fr; }
+    .impact-card { border-right: none; border-bottom: 1px solid var(--line); }
+    #contact { grid-template-columns: 1fr; }
+    .contact-left { border-right: none; padding-right: 0; margin-bottom: 3rem; }
+    .contact-right { padding-left: 0; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Sanjiv Mohanty</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Work</a></li>
+    <li><a href="#impact">Impact</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="mailto:sanjivmohanty04@gmail.com" class="nav-cta">Hire Me →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Strategy × Product × Data</div>
+    <h1 class="hero-name">Sanjiv<br><em>Mohanty</em></h1>
+    <p class="hero-sub">Turning operational chaos into<br>measurable outcomes.</p>
+    <p class="hero-desc">Strategy and operations professional with 2+ years across travel-tech and construction engineering — specialising in AI-driven automation, data analytics, and cross-functional product execution.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn btn-primary">Let's Talk →</a>
+      <a href="#experience" class="btn btn-outline">View My Work</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-bg-text">PM</div>
+    <div class="hero-stats">
+      <div class="stat-cell fade-up delay-1">
+        <span class="stat-num">25%</span>
+        <span class="stat-label">Revenue uplift driven</span>
+      </div>
+      <div class="stat-cell fade-up delay-2">
+        <span class="stat-num">40%</span>
+        <span class="stat-label">Onboarding time cut</span>
+      </div>
+      <div class="stat-cell fade-up delay-3">
+        <span class="stat-num">50+</span>
+        <span class="stat-label">Agents interviewed</span>
+      </div>
+      <div class="stat-cell fade-up delay-4">
+        <span class="stat-num">2+</span>
+        <span class="stat-label">Years of impact</span>
+      </div>
+    </div>
+    <div class="hero-scroll">Scroll to explore</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<div id="about">
+  <div class="fade-up">
+    <div class="section-tag" style="font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);">01 / About</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;margin-top:0.75rem;line-height:1.1;">The<br><em style="color:var(--accent);">person</em><br>behind<br>the work.</h2>
+    <ul class="about-meta">
+      <li><span>Based in</span><span>Ghaziabad, UP</span></li>
+      <li><span>Education</span><span>B.Tech Civil Engg, VIT Vellore — 8.49 CGPA</span></li>
+      <li><span>Currently</span><span>TravClan, New Delhi</span></li>
+      <li><span>Published</span><span>IOP Conference Series, 2024</span></li>
+    </ul>
+  </div>
+  <div class="fade-up delay-2">
+    <p class="about-text">I am a <strong>strategy and operations professional</strong> who builds at the intersection of product thinking, data intelligence, and automation. My work consistently translates complex operational problems into systems that scale.</p>
+    <p class="about-text">From designing <strong>AI-driven support workflows</strong> on WhatsApp to building <strong>RAG-based knowledge bots</strong> that cut onboarding time by 40% — I treat every problem as a product problem: understand users deeply, measure ruthlessly, and ship with intent.</p>
+    <p class="about-text">Before travel-tech, I shipped production dashboards and optimised workflows on a <strong>USD 174.5M construction project</strong>, learning that operational rigour is universal across industries.</p>
+    <div class="skills-grid">
+      <span class="skill-pill">Python</span>
+      <span class="skill-pill">SQL / MySQL</span>
+      <span class="skill-pill">Power BI</span>
+      <span class="skill-pill">Tableau</span>
+      <span class="skill-pill">n8n.io</span>
+      <span class="skill-pill">Claude AI</span>
+      <span class="skill-pill">RAG Systems</span>
+      <span class="skill-pill">OpenAI API</span>
+      <span class="skill-pill">Google Apps Script</span>
+      <span class="skill-pill">SAP</span>
+      <span class="skill-pill">MS Project</span>
+      <span class="skill-pill">Hypothesis Testing</span>
+      <span class="skill-pill">Regression Analysis</span>
+      <span class="skill-pill">Periskope AI</span>
+      <span class="skill-pill">Lovable.dev</span>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="background:var(--ink);color:var(--paper);">
+  <div class="section-header">
+    <span class="section-tag" style="color:rgba(245,240,232,0.4);">02 / Work</span>
+    <h2 class="section-title" style="color:var(--paper);">Where I've<br><em style="color:var(--accent);">made an impact.</em></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="exp-list">
+
+    <div class="exp-item fade-up">
+      <div class="exp-meta">
+        <div class="exp-co">TravClan</div>
+        <div class="exp-role">Operations & Strategy Associate</div>
+        <div class="exp-date">Apr 2025 – Present</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-badge">Travel-Tech · New Delhi</div>
+        <ul class="exp-highlights">
+          <li>Architected an <strong>AI-driven WhatsApp support workflow</strong> on Periskope AI with automated escalation detection, ticket routing, and real-time SLA dashboard — reducing manual triage overhead and revenue leakage.</li>
+          <li>Built a <strong>supplier performance dashboard</strong> via Claude Code & Google Apps Script, automating email reports with guest ratings and escalation metrics.</li>
+          <li>Developed a <strong>RAG-based internal knowledge bot</strong> trained on operational SOPs — reducing onboarding time by 40% and eliminating dependency on manual knowledge transfer.</li>
+          <li>Conducted monthly 1:1 sessions with <strong>~50 travel agents</strong>, synthesising product friction insights into improvements that drove a <strong>25% revenue uplift</strong>.</li>
+          <li>Built a <strong>predictive analytics framework</strong> (SQL + Power BI) to model guest satisfaction, forecast churn risk, and estimate revenue impact across markets.</li>
+          <li>Designed an <strong>agentic automation pipeline</strong> on n8n.io orchestrating Ontrip, OpenAI & WhatsApp Business APIs to handle guest logistics end-to-end.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item fade-up delay-1">
+      <div class="exp-meta">
+        <div class="exp-co">Shapoorji Pallonji E&C</div>
+        <div class="exp-role">Project Engineer (Construction)</div>
+        <div class="exp-date">Aug 2023 – Feb 2025</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-badge">Construction Engineering · Kolkata</div>
+        <ul class="exp-highlights">
+          <li>Managed execution planning across <strong>4 basement floors</strong> of a USD 174.5M Gurugram tower — building Excel and MS Project dashboards for labour productivity and structural completion tracking.</li>
+          <li>Spearheaded strategic planning for the <strong>NPTB Petrapole project</strong> (Indo-Bangladesh border), delivering MIS reports and workflow optimisations that led to a successful inauguration.</li>
+          <li>Developed a real-time <strong>DGU glass installation dashboard</strong> tracking received, installed, and damaged units — providing live visibility to management.</li>
+          <li>Optimised the bar-bending schedule by designing a <strong>backend algorithm for a web application</strong>, enabling exact tracking of steel usage per structural element in real time.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item fade-up delay-2">
+      <div class="exp-meta">
+        <div class="exp-co">TATA Motors</div>
+        <div class="exp-role">Summer Intern (Construction)</div>
+        <div class="exp-date">Jun 2022 – Jul 2022</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-badge">Internship · Jamshedpur</div>
+        <ul class="exp-highlights">
+          <li>Performed quantity surveying using <strong>Google Earth Pro and MS Excel</strong> for the construction of a new Axle Yard (~90,000 sqft) for HSD 6-wheel trucks.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section id="impact">
+  <div class="section-header">
+    <span class="section-tag">03 / Impact</span>
+    <h2 class="section-title">Numbers that<br><em style="color:var(--accent);font-style:italic;">speak.</em></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="impact-grid">
+    <div class="impact-card fade-up">
+      <div class="impact-num">40%</div>
+      <div class="impact-title">Onboarding Time Reduced</div>
+      <div class="impact-desc">RAG-based internal knowledge bot trained on SOPs eliminated manual knowledge transfer for new hires at TravClan.</div>
+    </div>
+    <div class="impact-card fade-up delay-1">
+      <div class="impact-num">25%</div>
+      <div class="impact-title">Revenue Uplift</div>
+      <div class="impact-desc">Monthly feedback loops with 50+ travel agents translated into product improvements driving measurable revenue growth.</div>
+    </div>
+    <div class="impact-card fade-up delay-2">
+      <div class="impact-num">$174M</div>
+      <div class="impact-title">Project Scale Managed</div>
+      <div class="impact-desc">Led execution planning and dashboard development for a USD 174.5M tower in Gurugram across 4 basement floors.</div>
+    </div>
+    <div class="impact-card fade-up delay-1">
+      <div class="impact-num">0</div>
+      <div class="impact-title">Manual Ops Interventions</div>
+      <div class="impact-desc">Agentic pipeline on n8n.io handles guest logistics change requests end-to-end with no human touchpoints required.</div>
+    </div>
+    <div class="impact-card fade-up delay-2">
+      <div class="impact-num">1×</div>
+      <div class="impact-title">Published Researcher</div>
+      <div class="impact-desc">Research paper on steel-fibre reinforced concrete published in IOP Conference Series (British publication), April 2024.</div>
+    </div>
+    <div class="impact-card fade-up delay-3">
+      <div class="impact-num">2×</div>
+      <div class="impact-title">Competition Winner</div>
+      <div class="impact-desc">1st at CXO Challenge (IIIT Raipur), 3rd at BrandWars (IIT Madras) — competing against India's best management minds.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-left fade-up">
+    <div class="section-tag" style="font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;">04 / Contact</div>
+    <h2 class="contact-tagline">Let's build<br>something<br><em>remarkable.</em></h2>
+    <p style="color:var(--muted);font-size:0.95rem;margin-top:1rem;line-height:1.8;">Open to product management, strategy, and operations roles. Always interested in connecting with founders, PMs, and data-driven teams.</p>
+    <ul class="contact-info-list">
+      <li><span class="contact-icon">Email</span><a href="mailto:sanjivmohanty04@gmail.com">sanjivmohanty04@gmail.com</a></li>
+      <li><span class="contact-icon">Phone</span><a href="tel:+919958720378">+91 99587 20378</a></li>
+      <li><span class="contact-icon">LinkedIn</span><a href="https://www.linkedin.com/in/sanjiv-mohanty-480397199/" target="_blank">sanjiv-mohanty-480397199</a></li>
+      <li><span class="contact-icon">Location</span><span>Ghaziabad, Uttar Pradesh, India</span></li>
+    </ul>
+  </div>
+
+  <div class="contact-right fade-up delay-2">
+    <div>
+      <label class="contact-form-label">Your Name</label>
+      <input type="text" id="field-name" class="contact-input" placeholder="Jane Smith" />
+    </div>
+    <div>
+      <label class="contact-form-label">Your Email</label>
+      <input type="email" id="field-email" class="contact-input" placeholder="jane@company.com" />
+    </div>
+    <div>
+      <label class="contact-form-label">What's on your mind?</label>
+      <textarea id="field-message" class="contact-input" placeholder="I'd love to discuss a product role / collaboration / project..."></textarea>
+    </div>
+    <button class="btn btn-primary contact-submit" onclick="handleContactSubmit(this)">Send Message →</button>
+    <div id="form-success" style="display:none;font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-top:1rem;">✓ Message noted! Sanjiv will be in touch.</div>
+    <div id="form-error" style="display:none;font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:#c84b2f;margin-top:1rem;">✕ Something went wrong — please email directly.</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-note">© 2025 Sanjiv Mohanty</span>
+  <div class="footer-links">
+    <a href="mailto:sanjivmohanty04@gmail.com">Email</a>
+    <a href="https://www.linkedin.com/in/sanjiv-mohanty-480397199/" target="_blank">LinkedIn</a>
+    <a href="#hero">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+  /* ============================================================
+     GOOGLE SHEETS INTEGRATION
+     ➜ Replace the URL below with your Apps Script Web App URL
+     ➜ Go to Extensions → Apps Script → Deploy → New Deployment
+     ============================================================ */
+  const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+
+  async function handleContactSubmit(btn) {
+    const nameEl    = document.getElementById('field-name');
+    const emailEl   = document.getElementById('field-email');
+    const messageEl = document.getElementById('field-message');
+    const successEl = document.getElementById('form-success');
+    const errorEl   = document.getElementById('form-error');
+
+    // Reset state
+    successEl.style.display = 'none';
+    errorEl.style.display   = 'none';
+
+    // Validate
+    if (!nameEl.value.trim() || !emailEl.value.trim() || !messageEl.value.trim()) {
+      btn.textContent = 'Please fill all fields';
+      setTimeout(() => btn.textContent = 'Send Message →', 2000);
+      return;
+    }
+
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    try {
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors', // required for Apps Script
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:    nameEl.value.trim(),
+          email:   emailEl.value.trim(),
+          message: messageEl.value.trim()
+        })
+      });
+      // no-cors means we can't read the response — assume success if no throw
+      btn.style.display = 'none';
+      successEl.style.display = 'block';
+      nameEl.value = '';
+      emailEl.value = '';
+      messageEl.value = '';
+    } catch (err) {
+      btn.textContent = 'Send Message →';
+      btn.disabled = false;
+      errorEl.style.display = 'block';
+    }
+  }
+
+  /* ============================================================
+     SCROLL ANIMATIONS
+     ============================================================ */
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
+
+  // Immediately reveal hero stats
+  setTimeout(() => {
+    document.querySelectorAll('#hero .fade-up').forEach(el => el.classList.add('visible'));
+  }, 300);
+
+  /* ============================================================
+     NAV ACTIVE STATES
+     ============================================================ */
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => a.style.color = '');
+        const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+        if (active) active.style.color = 'var(--ink)';
+      }
+    });
+  }, { threshold: 0.4 });
+
+  document.querySelectorAll('section[id], div[id]').forEach(s => navObserver.observe(s));
+</script>
+</body>
+</html>
